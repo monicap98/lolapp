@@ -1,14 +1,6 @@
 <template>
     <div class="hero">
-        <img src="../assets/imgs/lol.jpg" alt="" />
-        <div class="text-container">
-            <div class="text">
-                <span class="mini-heading">League of Legends</span>
-                <h1><span>Scegli un </span>CAMPIONE</h1>
-                <p class="paragraph">Con più di 140 campioni, troverai quello perfetto per il tuo stile di gioco.<br>Padroneggiane uno, o tutti.</p> <br>
-                <a href="#champion-grid" class="button">Vedi campioni</a>
-            </div>
-        </div>
+        <!-- <img src="../assets/imgs/lol.jpg" alt="" /> -->
     </div>
 </template>
 
@@ -20,10 +12,14 @@ export default {
 
 <style lang="scss" scoped>
 .hero {
-  height: 400px;
+  height: 40vh;
   position: relative;
+  background-image: url("../assets/imgs/lol.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   @media (min-width: 750px) {
-    height: 500px;
+    height: 50vh;
   }
   &::after {
     content: '';
@@ -34,6 +30,7 @@ export default {
     width: 100%;
     background-color: rgba(0, 0, 0, 0.6);
   }
+
   img {
     width: 100%;
     height: 100%;

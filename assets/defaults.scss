@@ -13,12 +13,16 @@
 
 
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'BeaufortforLOL-Bold';
+body {
+  margin: 0px;
+  display: block;
+  cursor: default;
+  -webkit-tap-highlight-color: transparent;
+  font-family: "Spiegel";
+  overflow-y: scroll;
   scroll-behavior: smooth;
+  line-height: 1.15;
+  text-size-adjust: 100%;
 }
 
 // app transitions
@@ -94,4 +98,8 @@
 
 p {
   color: #fff;
+}
+
+h1 {
+  font-size: 2em;
 }
