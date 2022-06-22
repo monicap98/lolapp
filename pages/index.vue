@@ -1,11 +1,6 @@
 <template>
   <div class="home">
-    <!-- Hero -->
-    <Hero />
-
     <!-- Heading -->
-    <div class="section">
-      <div class="general-wrapper">
         <div class="heading-wrapper">
           <h1 class="heading">
             <span class="intro">
@@ -30,7 +25,7 @@
           <Filters />
 
     <!-- Champions -->
-
+    <div class="background"></div>
     <div class="container champions">
       <div id="champion-grid" class="champions-grid">
           <div class="champion" v-for="champion in champions" :key="champion.id">
@@ -39,36 +34,46 @@
               :src="`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion.id}_0.jpg`"
               alt=""
             />
-            <p class="difficulty">{{champion.info.difficulty}}</p>
-            <p class="blurb">{{champion.blurb}}</p>
-          </div>
-            <div class="info">
-              <p class="title">{{champion.name}}</p>
-              <p class="subtitle">{{champion.title}}</p>
-              <NuxtLink
-                :to="{ name: 'champions-championid', params: { id : champion.id }}"
-                class="button button-light">
-                Scopri di più
-              </NuxtLink>
+            <div class="info2">
+              <h1 class="title2">{{champion.name}}</h1>
+              <h2 class="subtitle2">
+                <span>{{champion.title}}</span>
+                </h2>
             </div>
+            <NuxtLink :to="{ name: 'champions-championid', params: { id : champion.id }}" class="action">
+              <span>Esplora</span>
+              <span class="arrow" style="width: 25px; height: 12.5px">
+                <span class="hover-arrow">
+                  <svg version="1.0" x="0px" y="0px" viewBox="0 0 162 70.28" fill="#c4b998" style="width: 12.5px;">
+                    <circle fill="#c4b998" cx="31.57" cy="35.21" r="11.57"></circle>
+                    <g>
+                      <polygon fill="#c4b998" points="124.18,70.39 118.31,64.09 149.37,35.22 118.31,6.35 124.18,0.05 162,35.22"></polygon>
+                      <rect x="84.61" y="29.76" fill="#c4b998" width="65" height="11.06"></rect>
+                    </g>
+                  </svg>
+                </span>
+                <span class="rest-arrow">
+                  <svg version="1.0" x="0px" y="0px" viewBox="0 0 162 70.28" fill="#937341" style="width: 12.5px;">
+                    <circle fill="#937341" cx="31.57" cy="35.21" r="11.57"></circle>
+                    <g>
+                      <polygon fill="#937341" points="124.18,70.39 118.31,64.09 149.37,35.22 118.31,6.35 124.18,0.05 162,35.22"></polygon>
+                      <rect x="84.61" y="29.76" fill="#937341" width="65" height="11.06"></rect>
+                    </g>
+                  </svg>
+                </span>
+              </span>
+            </NuxtLink>
+          </div>
           </div>
        </div> 
       </div>
     </div>
   </div>
-        </div>
-      </div>
 
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      searchedChampions: [],
-      searchInput: '',
-    }
-  },
   async asyncData({ params, $axios }) {
     const json = await $axios.$get(
       'https://ddragon.leagueoflegends.com/cdn/12.9.1/data/it_IT/champion.json'
@@ -76,23 +81,27 @@ export default {
     const champions = json.data
     return { champions }
   },
-  methods: {
-    async searchedChampions () {
-      const data = axios.get()
-    }
-  },
 }
 </script>
 
 <style lang="scss" scoped>
-
-.section {
-  margin-top: -150px;
+.home {
+  padding-top: 120px;
+  align-items: flex-start;
 }
-.general-wrapper {
-  padding: 100px 0px 140px;
+.background {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  filter: brightness(.4);
+  background-image: url(../assets/imgs/championsBackground.jpg);
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: .2;
 }
-
 // Heading
 .heading-wrapper {
   position: relative;
@@ -161,18 +170,12 @@ export default {
   margin-top: 75px;
 }
 
- .button {
-   border-top-left-radius: 0;
-   border-bottom-left-radius: 0;
- }
-
-
   .champions {
-    padding: 32px 16px;
+    padding: 32px 80px;
     .champions-grid {
       display: grid;
-      column-gap: 32px;
-      row-gap: 64px;
+      column-gap: 16px;
+      row-gap: 32px;
       grid-template-columns: 1fr;
       @media (min-width: 500px) {
         grid-template-columns: repeat(2, 1fr);
@@ -181,67 +184,143 @@ export default {
         grid-template-columns: repeat(2, 1fr);
       }
       @media (min-width: 1100px) {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(5, 1fr);
       }
       .champion {
         position: relative;
         display: flex;
         flex-direction: column;
+        flex: 0 1 19%;
+        height: 425px;
+        margin-bottom: 1%;
+        margin-right: 1%;
+        opacity: 1;
+        }
         .champion-img {
           position: relative;
           overflow: hidden;
+          transition-property: transform,z-index,border;
+          transition-timing-function: ease,linear,ease;
+          transition-duration: .4s,.4s,.4s;
+          border: 1px solid rgba(10,10,12,.9);
+          box-shadow: 0 0 16px 14px rgb(0 0 0 / 20%);
+          z-index: 1;
           &:hover {
-            .blurb {
-              transform: translateY(0);
+            @media (min-width: 768px) {
+              transition-timing-function: ease, step-start, ease;
+              transform: scale(1.1);
+              border: 1px solid #927345;
+              z-index: 3;
+            }
+          }
+          &:hover .info2 {
+            @media (min-width: 768px) {
+              bottom: 54px;
+            }
+          }        
+          &:hover .action {
+            @media (min-width: 768px) {
+              background-color: rgba(10,10,12,.94);
+              border-top: 1px solid #927345;
+              height: 54px;
             }
           }
           img {
             display: block;
-            width: 100%;
-            height: 100%;
-          }
-          .difficulty {
-            position: absolute;
-            top: 0;
-            left: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 40px;
-            height: 40px;
-            background-color: #d0a85c;
-            color: #fff;
-            border-radius: 0 0 16px 0;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-              0 2px 4px -1px rgba(0, 0, 0, 0.06);
-          }
-          .blurb {
-            line-height: 1.5;
-            position: absolute;
-            bottom: 0;
-            background-color: #d0a85c;
-            padding: 12px;
-            color: #fff;
-            transform: translateY(100%);
-            transition: 0.3s ease-in-out all;
+            width: 110%;
+            height: 110%;
+            object-fit: cover;
+            object-position: -10px -10px;
           }
         }
-        .info {
-          margin-top: auto;
-          .title {
-            margin-top: 8px;
-            color: #fff;
-            font-size: 20px;
+        .info2 {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          background-color: rgba(10,10,12,.9);
+          border-top: 1px solid #927345;
+          padding: 22px;
+          text-align: center;
+          transition: .4s;
+        }
+        .title2 {
+          color: #937341;
+          font-size: 14px;
+          letter-spacing: 2px;
+          font-family: BeaufortforLOL-Bold, sans-serif;
+          font-weight: 500;
+          text-transform: uppercase;
+        }
+        .subtitle2 {
+          color: #c4b998;
+          font-size: 12px;
+          letter-spacing: .05em;
+          padding-top: 6px;
+          font-family: BeaufortforLOL-Bold, sans-serif;
+          font-weight: 500;
+          text-transform: capitalize;
+        }
+        .action {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          font-family: BeaufortforLOL-Bold, sans-serif;
+          font-weight: 700;
+          font-size: 11px;
+          background-color: rgba(10,10,12,.9);
+          border-top: 1px solid rgba(10,10,12,.9);
+          color: #937341;
+          height: 0;
+          letter-spacing: .3em;
+          line-height: 54px;
+          overflow: hidden;
+          text-align: center;
+          text-decoration: none;
+          text-transform: uppercase;
+          transition: .4s;
+          &:hover .arrow .hover-arrow {
+            transform: translateX(50%);
+            transition-delay: .22s;
+            opacity: 1;
           }
-          .subtitle {
-            margin-top: 8px;
-            color: #c9c9c9;
+          &:hover .arrow .rest-arrow {
+            transform: translateX(230%);
+            transition-delay: 0s;
+            opacity: 0;
           }
+        }
+        .arrow {
+          position: relative;
+          display: inline-block;
+          cursor: pointer;
+          line-height: 1;
+          top: 2px;
+        }
+        .hover-arrow {
+          transition: .44s;
+          opacity: 0;
+          position: absolute;
+          top: 0;
+          left: 0;
+          transform: translateX(-130%);
+        }
+        .hover-arrow svg, .rest-arrow svg {
+          max-height: 25px;
+        }
+        .rest-arrow {
+          transition: .44s;
+          position: absolute;
+          top: 0;
+          left: 0;
+          transition-delay: .22s;
+          opacity: 1;
+          transform: translateX(50%);
+        }
           .button {
             margin-top: 8px;
           }
         }
       }
-    }
-  }
 </style>

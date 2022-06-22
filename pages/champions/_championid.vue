@@ -17,9 +17,7 @@
       </div>
       <div class="section-inner">
         <div class="dock">
-          <div class="info-container">
-            <canvas class="info-canvas" width="1966" height="583" style="width: 983px; height: 291.953px; left: -2px; top: -2px; border: 1px solid; color: white;"></canvas>
-          </div>
+          <div class="info-container"></div>
           <div class="name-container">
             <div class="name-wrapper">
               <h1 class="heading">
@@ -36,6 +34,7 @@
               </h1>
             </div>
           </div>
+          <img class="divider" src="../../assets/imgs/HeaderDivider.png" alt="Divider"></img>
           <div class="info-wrapper">
             <div class="specs">
               <ul class="specs-list">
@@ -47,13 +46,13 @@
                     </svg>
                   </div>
                   <div class="specs-item-type">Ruolo</div>
-                  <div class="specs-item-value">{{ champion.tags }}</div>
+                  <div class="specs-item-value">{{ champion.tags[0] }}</div>
                 </li>
                 <li class="specs-item">
                   <div class="specs-item-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="specs-icon">
-                      <path d="M67.84 56.35v5.5c8.62-8.62 14.37 0 14.37 0C112.14 40.78 90.35 2 90.35 2s-.72 17.24-15.08 27.77v16.52c-.24 4.79-3.84 7.9-7.43 10.06M17.79 62.09s4.07-6.46 10.78-2.63L20.91 48.2l6.7-16c-17.24-10.54-18-29.93-18-29.93S-12.14 41 17.79 62.09M26.89 83.89l5.51-18.68-.24-.48L19.23 77.9A17.78 17.78 0 017.5 83.17H3l-1 2.39 12 11.5zM92.27 83.89a16.24 16.24 0 01-11.74-5.27L68.8 66.88l3.83 17.72L85.8 98l12-11.49-1-2.4zM55.87 42.7c0 .24-.24.48-.24.71h.72c5.75.48 7.66 2.64 9.1 7.67a9.35 9.35 0 002.39-1.92c1-1 1.68-1.67 1.68-2.63V28.09a2 2 0 00-1.68-1.92l-31.37-5.74H36a2.39 2.39 0 00-2.39 2.39v6.71l24.9 3.35z"></path>
-                      <path d="M60.18 54c-1.2-5.27-1.44-4.55-5.75-4.79L40.78 48v-3.87h5.51A4.09 4.09 0 0050.36 41l1-3.35L32.4 35l-5 12.22 11.74 17-5.54 18.47L49.88 98l16.53-15.07s-6.23-28.5-6.23-29M49.88 2.23l-4.79 10.29 4.79 3.83 4.79-3.83zM62.1 9.41l1.43 6h6l2.87-11zM30.25 15.4h6l.24-.72 1.2-5.27-10.3-5z"></path>
+                      <path d="M85.92 63.89L55 90V67.48h7.42v-9.1H37.55v9.1H45v22.75L14.08 63.89 8.33 21l27.54-10.51a39.13 39.13 0 0128.26 0L91.67 21zM66.28 5a47.61 47.61 0 00-32.56 0L2.11 17.19l6.7 49.57L41.86 95A13 13 0 0050 97.89 12.5 12.5 0 0058.14 95l33.05-28.24 6.7-49.57z"></path>
+                      <path d="M78.74 32.28L62 21.26v5.27H38v-5.27l-16.26 7.19a2.9 2.9 0 00-1.67 3.11l4.31 19.16a3.22 3.22 0 002.15 2.15l11.26 2.4V50h23.94v5.27l11.5-2.4a2.52 2.52 0 002.15-2.15l4.31-15.57a2.39 2.39 0 00-1-2.87M57.42 20.07H42.58L50 11.68z"></path>
                     </svg>
                   </div>
                   <div class="specs-item-type">Difficoltà</div>
@@ -68,15 +67,14 @@
           </div>
         </div>
         <div class="champions-button-container">
-          <div class="champions-button">
-            <canvas class="button-canvas" width="316" height="72" style="width: 158.125px; height: 36px; left: -2px; top: -2px;"></canvas>
-          </div>
-          <a href="" class="champions-button-link">
-            <span class="champions-button-text">Lista campioni</span>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 15" class="champions-button-icon">
-              <path d="M12.8 8.4V4.8S13 1.1 7 0h-.1c-6 1.1-5.8 4.8-5.8 4.8v3.6c0 1.9-.8 2.5-.8 2.5C1.5 15.3 4.5 15 4.5 15c-1.6-2.1 0-5.8 0-5.8-2.3-.3-1.9-2.7-1.7-3.4 0 0 2.2-.1 3.3 1.6v4.2l.9.9.8-.8V7.5c1.2-1.8 3.3-1.7 3.3-1.6.2.7.6 3.1-1.7 3.3 0 0 1.6 3.8 0 5.8 0 0 3 .3 4.2-4.1.1 0-.8-.6-.8-2.5z"></path>
-            </svg>
-          </a>
+          <NuxtLink
+                :to="{ name: 'index', params: { id : champion.id }}"
+                class="champions-button-link">
+                <span class="champions-button-text">Lista campioni</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 15" class="champions-button-icon">
+                  <path d="M12.8 8.4V4.8S13 1.1 7 0h-.1c-6 1.1-5.8 4.8-5.8 4.8v3.6c0 1.9-.8 2.5-.8 2.5C1.5 15.3 4.5 15 4.5 15c-1.6-2.1 0-5.8 0-5.8-2.3-.3-1.9-2.7-1.7-3.4 0 0 2.2-.1 3.3 1.6v4.2l.9.9.8-.8V7.5c1.2-1.8 3.3-1.7 3.3-1.6.2.7.6 3.1-1.7 3.3 0 0 1.6 3.8 0 5.8 0 0 3 .3 4.2-4.1.1 0-.8-.6-.8-2.5z"></path>
+                </svg>
+          </NuxtLink>
         </div>
       </div>
       <svg width="17" height="58" fill="none" xmlns="http://www.w3.org/2000/svg" class="scroll-indicator">
@@ -102,17 +100,12 @@
                   <div class="side-fill">
                     <div class="baseline-left"></div>
                   </div>
-                  <div class="option-list">
+                  <div class="option-list" id="ability">
                     <h2 class="abilities-title">Abilità</h2>
-                    <button class="option">
+                    <button @click='showPassive' class="option is-active">
                       <span class="option-icon">
                         <span class="option-icon-content">
-                          <img :src="`http://ddragon.leagueoflegends.com/cdn/12.10.1/img/passive/${champion.id}_Passive.png`" alt="">
-                        </span>
-                        <span class="option-icon-border">
-                          <div class="option-container">
-                            <canvas class="option-canvas" width="74" height="74" style="width: 74px; height: 74px; left: -2px; top: -2px;"></canvas>
-                          </div>
+                          <img :src="`http://ddragon.leagueoflegends.com/cdn/12.10.1/img/passive/${champion.passive.image.full}`" alt="">
                         </span>
                       </span>
                       <span class="option-line"></span>
@@ -120,15 +113,10 @@
                         <span class="bullet"></span>
                       </span>
                     </button>
-                    <button class="option">
+                    <button @click='showQ' class="option">
                       <span class="option-icon">
                         <span class="option-icon-content">
-                          <img :src="`http://ddragon.leagueoflegends.com/cdn/12.10.1/img/passive/${champion.id}_Passive.png`" alt="">
-                        </span>
-                        <span class="option-icon-border">
-                          <div class="option-container">
-                            <canvas class="option-canvas" width="74" height="74" style="width: 74px; height: 74px; left: -2px; top: -2px;"></canvas>
-                          </div>
+                          <img :src="`http://ddragon.leagueoflegends.com/cdn/12.10.1/img/spell/${champion.spells[0].image.full}`" alt="">
                         </span>
                       </span>
                       <span class="option-line"></span>
@@ -136,15 +124,10 @@
                         <span class="bullet"></span>
                       </span>
                     </button>
-                    <button class="option">
+                    <button @click='showW' class="option">
                       <span class="option-icon">
                         <span class="option-icon-content">
-                          <img :src="`http://ddragon.leagueoflegends.com/cdn/12.10.1/img/passive/${champion.id}_Passive.png`" alt="">
-                        </span>
-                        <span class="option-icon-border">
-                          <div class="option-container">
-                            <canvas class="option-canvas" width="74" height="74" style="width: 74px; height: 74px; left: -2px; top: -2px;"></canvas>
-                          </div>
+                          <img :src="`http://ddragon.leagueoflegends.com/cdn/12.10.1/img/spell/${champion.spells[1].image.full}`" alt="">
                         </span>
                       </span>
                       <span class="option-line"></span>
@@ -152,15 +135,10 @@
                         <span class="bullet"></span>
                       </span>
                     </button>
-                    <button class="option">
+                    <button @click='showE' class="option">
                       <span class="option-icon">
                         <span class="option-icon-content">
-                          <img :src="`http://ddragon.leagueoflegends.com/cdn/12.10.1/img/passive/${champion.id}_Passive.png`" alt="">
-                        </span>
-                        <span class="option-icon-border">
-                          <div class="option-container">
-                            <canvas class="option-canvas" width="74" height="74" style="width: 74px; height: 74px; left: -2px; top: -2px;"></canvas>
-                          </div>
+                          <img :src="`http://ddragon.leagueoflegends.com/cdn/12.10.1/img/spell/${champion.spells[2].image.full}`" alt="">
                         </span>
                       </span>
                       <span class="option-line"></span>
@@ -168,15 +146,10 @@
                         <span class="bullet"></span>
                       </span>
                     </button>
-                    <button class="option">
+                    <button @click='showR' class="option">
                       <span class="option-icon">
                         <span class="option-icon-content">
-                          <img :src="`http://ddragon.leagueoflegends.com/cdn/12.10.1/img/passive/${champion.id}_Passive.png`" alt="">
-                        </span>
-                        <span class="option-icon-border">
-                          <div class="option-container">
-                            <canvas class="option-canvas" width="74" height="74" style="width: 74px; height: 74px; left: -2px; top: -2px;"></canvas>
-                          </div>
+                          <img :src="`http://ddragon.leagueoflegends.com/cdn/12.10.1/img/spell/${champion.spells[3].image.full}`" alt="">
                         </span>
                       </span>
                       <span class="option-line"></span>
@@ -191,15 +164,34 @@
                     </div>
                     <div class="ability-info">
                       <ol class="ability-info-list">
-                        <li class="ability-info-item">
+                        <li v-show='showPassive' class="ability-info-item">
                           <h6 class="ability-info-item-type">Passiva</h6>
-                          <h5 class="ability-info-item-name">Posizione del messaggero della morte{{ champion.spells.name }}</h5>
-                          <p class="ability-info-item-desc">Periodicamente l'attacco base successivo di Aatrox infligge danni fisici bonus e lo cura in base alla salute massima del bersaglio. {{ champion.spells.description }}</p>
+                          <h5 class="ability-info-item-name">{{ champion.passive.name }}</h5>
+                          <p class="ability-info-item-desc" v-html="champion.passive.description">{{ champion.passive.description }}</p>
+                        </li>
+                        <li v-show='showQ' class="ability-info-item">
+                          <h6 class="ability-info-item-type">Q</h6>
+                          <h5 class="ability-info-item-name">{{ champion.spells[0].name }}</h5>
+                          <p class="ability-info-item-desc" v-html="champion.spells[0].description">{{ champion.spells[0].description }}</p>
+                        </li>
+                        <li v-show='showW' class="ability-info-item">
+                          <h6 class="ability-info-item-type">W</h6>
+                          <h5 class="ability-info-item-name">{{ champion.spells[1].name }}</h5>
+                          <p class="ability-info-item-desc" v-html="champion.spells[1].description">{{ champion.spells[1].description }}</p>
+                        </li>
+                        <li v-show='showE' class="ability-info-item">
+                          <h6 class="ability-info-item-type">E</h6>
+                          <h5 class="ability-info-item-name">{{ champion.spells[2].name }}</h5>
+                          <p class="ability-info-item-desc" v-html="champion.spells[2].description">{{ champion.spells[2].description }}</p>
+                        </li>
+                        <li v-show='showR' class="ability-info-item">
+                          <h6 class="ability-info-item-type">R</h6>
+                          <h5 class="ability-info-item-name">{{ champion.spells[3].name }}</h5>
+                          <p class="ability-info-item-desc" v-html="champion.spells[3].description">{{ champion.spells[3].description }}</p>
                         </li>
                       </ol>
                     </div>
                   </div>
-                  <!-- <div class="option-list"></div> -->
                   <div class="side-fill">
                     <div class="baseline-right"></div>
                   </div>
@@ -208,21 +200,7 @@
             </div>
             <div class="preview-wrapper">
               <div class="wrap-preview-wrapper">
-                <div class="preview-wrapper-inner">
-                  <div class="video-container">
-                    <div class="video-wrapper">
-                      <div class="video-abilities">
-                        <div class="poster">
-                          <img src='https://d28xe8vt774jo5.cloudfront.net/champion-abilities/0067/ability_0067_P1.jpg' alt="" style="object-fit: cover;" class="poster-img">
-                        </div>
-                        <video src='https://d28xe8vt774jo5.cloudfront.net/champion-abilities/0067/ability_0067_P1.mp4' class="video"></video>
-                      </div>
-                    </div>
-                    <div class="canva-container">
-                      <canvas class="canva-video" width="1109" height="688" style="height: 344.156px; left: 8px; top: -12px; width: 554.734px; border: 1px solid; color: white;"></canvas>
-                    </div>
-                  </div>
-                </div>
+                <div class="preview-wrapper-inner"></div>
               </div>
             </div>
           </div>
@@ -247,6 +225,12 @@ export default {
         const champion = json.data[params.id]
         return { champion }
     },
+    
+  data () {
+    return {
+      showPassive: true,
+    }
+  }
 }
 </script>
 
@@ -258,7 +242,7 @@ export default {
   position: relative;
   min-height: 75vh;
   padding: 0px 0px 75px;
-  background: rgb(0, 9, 19);
+  background: #0a0a0c;
 }
 .background-asset{
   position: relative;
@@ -282,11 +266,16 @@ export default {
     bottom: -10%;
     width: 100%;
     height: 50%;
-    background: linear-gradient(transparent, rgb(0, 9, 19) 70%);
+    background: linear-gradient(transparent, rgb(10, 10, 12) 70%);
   }
 }
 img {
   border-style: none;
+}
+.divider {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
 }
 .blurimg {
   object-fit: cover;
@@ -302,6 +291,7 @@ img {
   position: absolute;
   left: 50%;
   top: 50%;
+  margin-top: 5%;
   transform: translate(-50%, -50%);
   animation: 2000ms cubic-bezier(0.215, 0.61, 0.355, 1) 700ms 1 normal;
 }
@@ -363,11 +353,6 @@ img {
   inset: 1px;
   pointer-events: none;
 }
-.info-canvas {
-  position: absolute;
-  display: block;
-  aspect-ratio: auto 1966 / 583;
-}
 .name-container {
   position: relative;
   top: -5rem;
@@ -414,6 +399,9 @@ img {
 .info-wrapper {
   position: relative;
   display: flex;
+
+  border: 1px solid rgba(208, 168, 92, 0.3);
+  border-top: none;
 }
 .specs {
   box-sizing: border-box;
@@ -473,7 +461,7 @@ img {
 .info-divider {
   width: 1px;
   margin: 2.5rem 0px;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(208, 168, 92, 0.3);
   transform-origin: center top;
 }
 .desc {
@@ -515,17 +503,8 @@ img {
   line-height: 1.1;
   text-align: left;
   text-transform: uppercase;
-}
-.champions-button {
-  position: absolute;
-  inset: 1px;
-  pointer-events: none;
-}
-.button-canvas {
-  position: absolute;
-  display: block;
-  aspect-ratio: auto 316 / 72;
-  border: 1px solid #fff;
+  background-color: rgba(10, 10, 12, 0.4);
+  border: 1px solid #d0a85c;
 }
 .champions-button-link {
   cursor: pointer;
@@ -535,7 +514,6 @@ img {
   color: rgb(255, 255, 255);
   padding: 10px 20px;
   text-decoration: none;
-  background-color: transparent;
 }
 .champions-button-text {
   vertical-align: middle;
@@ -553,7 +531,7 @@ img {
   bottom: 0px;
   left: 50%;
   transform: translate(-50%, 0px);
-  stroke: rgb(57, 64, 72);
+  stroke: rgba(208, 168, 92, 0.3);
   width: 17;
   height: 58;
   fill: none;
@@ -646,7 +624,6 @@ margin-inline-end: 0px;
   font-weight: 800;
   font-size: 3.75rem;
   display: block;
-  font-size: 1.5em;
   font-style: italic;
   text-transform: uppercase;
   margin-block-start: 0.83em;
@@ -665,6 +642,38 @@ margin-inline-end: 0px;
   border: 0px;
   background-color: transparent;
   color: rgb(57, 64, 72);
+  overflow: visible;
+  &:hover .option-icon-content {
+    transform: translateY(15px) scale(1, 1);
+    transition: transform 0.2s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+    fill: rgb(208, 168, 92);
+  }
+  &:hover .bullet {
+    transition: color 600ms ease 0s;
+    color: rgb(208, 168, 92);
+  }
+}
+.is-active .option-icon-content {
+  transform: translateY(0px) scale(1, 1);
+  transition: transform 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+  border: 2px solid #d0a85c;
+}
+.is-active .option-line {
+  opacity: 1;
+  transform: scaleY(1);
+  transition-duration: 400ms;
+  transition-delay: 400ms;
+}
+.is-active .option-bullet-container::before {
+  width: calc(50% - 10px);
+  transition: width 240ms ease 360ms;
+}
+.ability-info-item .is-active {
+  pointer-events: auto;
+  z-index: 1;
+  opacity: 1;
+  transition-duration: 1s;
+  transition-delay: 0.2s;
 }
 .option-icon {
   position: relative;
@@ -679,29 +688,16 @@ margin-inline-end: 0px;
   left: 5px;
   width: 60px;
   height: 60px;
-  transform: translateY(0px) scale(1, 1);
-  fill: rgb(208, 168, 92);
+  transform: translateY(20px) scale(1, 1);
+  will-change: transform;
+  transform-origin: center bottom;
+  transition: transform 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) 0s, fill 0.2s ease-in-out 0s;
+}
+.option-icon-content img {
   width: 100%;
   height: 100%;
   fill: rgb(57, 64, 72);
   transition: fill 0.15s ease-in-out 0s;
-}
-.option-icon-border {
-  left: -1px;
-  top: -1px;
-  opacity: 1;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  transition: opacity 200ms ease 0s;
-}
-.option-container {
-  width: 100%;
-  height: 100%;
-  fill: rgb(208, 168, 92);
-  position: absolute;
-  inset: 1px;
-  pointer-events: none;
 }
 .option-line {
   opacity: 1;
@@ -726,12 +722,10 @@ margin-inline-end: 0px;
   margin-top: 5.5px;
   margin-left: -12px;
   z-index: 1;
-  width: calc(50% - 10px);
-  transition: width 240ms ease 360ms;
   &::before {
     left: 0px;
   }
-  &::after {
+  &::before, &::after {
     content: "";
     position: absolute;
     bottom: 4.5px;
@@ -739,24 +733,18 @@ margin-inline-end: 0px;
     height: 1px;
     background-color: currentcolor;
     z-index: -1;
-    right: 0px;
+    transition: width 0ms ease 0ms;
   }
 }
 .bullet {
-  transition: color 600ms ease 0s;
-  color: rgb(208, 168, 92);
-  opacity: 0;
+  opacity: 1;
   margin: 0px auto;
   display: block;
   width: 9px;
   height: 9px;
   background-color: currentcolor;
   border-radius: 50%;
-  &::after {
-    width: calc(50% - 10px);
-    transition: width 240ms ease 360ms;
   }
-}
 .baseline {
   position: absolute;
   bottom: 16.5px;
@@ -811,18 +799,13 @@ margin-inline-end: 0px;
   padding-inline-start: 40px;
 }
 .ability-info-item {
-  pointer-events: auto;
-  z-index: 1;
-  opacity: 1;
-  transition-duration: 1s;
-  transition-delay: 0.2s;
   position: absolute;
   left: 0px;
   top: 0px;
   width: 100%;
+  pointer-events: none;
+  opacity: 1;
   transition: opacity 0.4s cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
-  display: list-item;
-  text-align: -webkit-match-parent;
 }
 .ability-info-item-type {
   margin-bottom: 0px;
@@ -869,8 +852,9 @@ margin-inline-end: 0px;
   position: absolute;
   bottom: 16.5px;
   left: 0px;
-  width: 100%;
+  width: 570%;
   height: 1px;
+  object-fit: fill;
   background-color: rgb(57, 64, 72);
 }
 .preview-wrapper {
@@ -887,62 +871,6 @@ margin-inline-end: 0px;
   width: 100%;
   padding-top: 56.25%;
 }
-.video-container {
-  position: absolute;
-  inset: 0px;
-}
-.video-wrapper {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: opacity 300ms cubic-bezier(0.645, 0.045, 0.355, 1) 300ms;
-}
-.video-wrapper.is-active {
-  z-index: 1;
-  opacity: 1;
-  transition-delay: 0ms;
-}
-.video-abilities {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  z-index: 0;
-}
-.poster {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  display: block;
-}
-.poster-img {
-  width: 100%;
-  height: 100%;
-}
-.video {
-  object-fit: cover;
-  object-position: center center;
-  position: relative;
-  z-index: 0;
-  width: 100%;
-  height: 100%;
-}
-.canva-container {
-  z-index: 1;
-  position: absolute;
-  inset: 1px;
-  pointer-events: none;
-}
-.canva-video {
-  position: absolute;
-  display: block;
-  aspect-ratio: auto 1109 / 688;
-}
 .background-icon {
   position: absolute;
   inset: -1px 0px 0px;
@@ -951,11 +879,11 @@ margin-inline-end: 0px;
   justify-content: center;
   -webkit-box-align: center;
   align-items: center;
-  background-color: rgb(0, 9, 19);
+  background-color: #0a0a0c;
 }
 .svg-bg {
   height: calc(100% - 30px);
-  fill: rgb(7, 18, 26);
+  fill: rgba(208, 168, 92, 0.04);
   overflow: hidden;
 }
 </style>

@@ -11,6 +11,10 @@
   src: url(../assets/fonts/spiegel.ttf) format('truetype');
 }
 
+physicaldamage {
+  color: red;
+  font-weight: 400;
+}
 
 body {
   margin: 0px;
@@ -23,7 +27,18 @@ body {
   line-height: 1.15;
   text-size-adjust: 100%;
 }
-
+ul {
+  list-style: none;
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+li {
+  vertical-align: top;
+}
 // app transitions
 .page-enter-active,
 .page-leave-active {
@@ -35,8 +50,8 @@ body {
 }
 
 .app {
-  background-color: #000913;
-  min-height: 100vh;
+  background-color: #0a0a0c;
+  min-height: 75vh;
 }
 
 .button {

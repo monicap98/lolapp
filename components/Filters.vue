@@ -1,50 +1,41 @@
 <template>
 
-    <div class="filter-wrapper">
-        <nav>
-          <div class="nav-inner">
-            <div class="nav-container">
-              <canvas class="style__Canvas-sc-1c9bc3r-1 hsvRhV" width="2766" height="104" style="width: 1383.4px; height: 52px; left: -2px; top: -2px;"></canvas>
-            </div>
-              <div class="nav-content">
-                <div class="nav-side">
-                  <div class="dropdown">
-                    <div class="dropdown-control">
-                      <div class="dropdown-value-container">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.69 15.69" class="svg-icon">
-                          <path class="st0" d="M6.46 1.5c2.74 0 4.96 2.23 4.96 4.96s-2.23 4.96-4.96 4.96S1.5 9.2 1.5 6.46 3.73 1.5 6.46 1.5m0-1.5C2.89 0 0 2.89 0 6.46s2.89 6.46 6.46 6.46 6.46-2.89 6.46-6.46C12.93 2.89 10.03 0 6.46 0z"></path>
-                          <path class="st1" d="M10.25 10.26l4.89 4.89"></path>
-                        </svg>
-                        <div class="dropdown-placeholder">Cerca</div>
-                        <div class="nonloso">
-                          <div class="dropdown-input">
-                            <input
-                              type="text" autocapitalize="none" autocomplete="off" autocorrect="off" id="react-select-2-input" spellcheck="false" tabindex="0" value="" aria-autocomplete="list" style="box-sizing: content-box; width: 2px; background: 0px center; border: 0px; font-size: inherit; opacity: 1; outline: 0px; padding: 0px; color: inherit;">
-                            <div
-                              style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 10px; font-family: 'Spiegel'; font-weight: 600; font-style: normal; letter-spacing: 1px; text-transform: uppercase;">
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="role-container">
-                  <ul class="role-list">
-                    <li class="role-item"><button class="role-button">Tutto</button></li>
-                    <li class="role-item"><button class="role-button">Assassini</button></li>
-                    <li class="role-item"><button class="role-button">Combattenti</button></li>
-                    <li class="role-item"><button class="role-button">Maghi</button></li>
-                    <li class="role-item"><button class="role-button">Tiratori</button></li>
-                    <li class="role-item"><button class="role-button">Supporti</button></li>
-                    <li class="role-item"><button class="role-button">Tank</button></li>
-                  </ul>
-                </div>
-                <div class="nav-side2">Tutte le difficoltà</div>
-              </div>
+  <ul class="filter-bar">
+    <div class="filter-wrap">
+      <div class="filter-input">
+        <img class="sort-icon" src="https://universe.leagueoflegends.com/esimages/content_type_icon_champion__3nwJQ.png" alt="Champion Icon">
+        <div>
+          <input class="search" type="text" placeholder="Trova un campione" />
+        </div>
+      </div>
+      <li class="filter-button">
+        <div class="button-content">
+          <img src="../assets/imgs/sortingicon.png" alt="">
+          <h5>
+            <span class="sorting-label">Ordina per</span>
+            <span class="secondary-text"> : 
+              <span class="sorting-alphabetical">A-Z</span>
+            </span>
+          </h5>
+        </div>
+        <div class="small-filter-parent">
+          <div class="small-filter invisible visible">
+            <ul>
+              <li>
+                <span class="sorting-alphabetical">A-Z</span>
+              </li>
+              <li>
+                <span class="sorting-newest">Novità</span>
+              </li>
+              <li>
+                <span class="sorting-faction">Regione</span>
+              </li>
+            </ul>
           </div>
-        </nav>
+        </div>
+      </li>
     </div>
+  </ul>
 
 </template>
 
@@ -55,6 +46,136 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.filter-bar {
+  position: relative;
+  background-color: #121212;
+  left: 0;
+  margin: 0;
+  max-width: 100vw;
+  opacity: 1;
+  right: 0;
+  box-sizing: inherit;
+  z-index: 10000;
+}
+.filter-wrap {
+  align-items: center;
+  background-color: #121212;
+  box-shadow: 0 16px 16px -16px rgb(0 0 0 / 70%);
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1280px;
+  padding: 0 30px;
+  width: 100%;
+  z-index: 200;
+}
+.filter-input {
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+}
+.sort-icon {
+  max-height: 32px;
+  padding-right: 20px;
+}
+.search {
+  font-family: BeaufortforLOL-Bold, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: rgb(147, 115, 65);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  background-color: rgba(0,0,0,0);
+  border: 0;
+  min-width: 650px;
+  padding: 35px 12px;
+  &:focus {
+    outline: none;
+  }
+}
+.filter-button {
+  border-width: 0 1px!important;
+  max-width: 50%;
+  width: 30%;
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  height: 90px;
+  justify-content: center;
+  position: relative;
+  z-index: 100;
+}
+.button-content {
+  background-image: radial-gradient(ellipse at 50% 12%,rgba(0,0,0,0),rgba(0,0,0,0) 40%);
+  align-items: center;
+  background-color: #121212;
+  display: flex;
+  height: 100%;
+  justify-content: flex-start;
+  width: 100%;
+  z-index: 100;
+  &:hover {
+    background-image: radial-gradient(ellipse at 50% 12%,#1b2528,#121212 40%);
+  }
+}
+.filter-button img {
+  max-height: 20px;
+  padding: 2px 30px 0 15px;
+}
+.sorting-label {
+  font-family: Beaufort for LOL,Arial,sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #c4b998;
+  letter-spacing: 4px;
+  overflow: hidden;
+  text-align: left;
+  text-transform: uppercase;
+}
+.secondary-text {
+  font-family: Beaufort for LOL,Arial,sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #937341;
+  letter-spacing: 4px;
+  overflow: hidden;
+  text-align: left;
+  text-transform: uppercase;
+}
+.small-filter-parent {
+  z-index: -1;
+}
+.small-filter {
+  left: 0;
+  width: 100%;
+  position: absolute;
+  top: 90px;
+  transition: transform .5s ease;
+  background-image: radial-gradient(circle at 50% 12%,#1b1b1b,#121212 40%);
+  z-index: 99;
+}
+.invisible {
+  transform: translateY(-325px);
+  opacity: 0;
+}
+.small-filter .invisible {
+  cursor: default;
+  pointer-events: none;
+}
+.small-filter li {
+  font-family: Beaufort for LOL,Arial,sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  transition: .2s;
+  color: #c4b998;
+  letter-spacing: 2px;
+  padding: 16px 32px 16px 67px;
+  text-align: left;
+  text-transform: uppercase;
+}
+
 .filter-wrapper {
   position: sticky;
   z-index: 5;
