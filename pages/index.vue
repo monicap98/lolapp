@@ -4,14 +4,10 @@
         <div class="heading-wrapper">
           <h1 class="heading">
             <span class="intro">
-              <div class="reveal-wrapper">
                 <span>scegli un</span>
-              </div>
             </span>
             <strong class="big-title">
-              <div class="reveal-wrapper">
                 <span class="big-big-title">campione</span>
-              </div>
             </strong>
           </h1>
         </div>
@@ -21,15 +17,16 @@
 
         <div class="body">
 
-          <!-- Filters -->
+          <!-- Filters
           <Filters />
+          -->
 
     <!-- Champions -->
     <div class="background"></div>
     <div class="container champions">
       <div id="champion-grid" class="champions-grid">
           <div class="champion" v-for="champion in champions" :key="champion.id">
-          <div class="champion-img">
+          <NuxtLink :to="{ name: 'champions-championid', params: { id : champion.id }}" class="champion-img">
             <img
               :src="`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion.id}_0.jpg`"
               alt=""
@@ -40,7 +37,7 @@
                 <span>{{champion.title}}</span>
                 </h2>
             </div>
-            <NuxtLink :to="{ name: 'champions-championid', params: { id : champion.id }}" class="action">
+            <div class="action">
               <span>Esplora</span>
               <span class="arrow" style="width: 25px; height: 12.5px">
                 <span class="hover-arrow">
@@ -62,8 +59,8 @@
                   </svg>
                 </span>
               </span>
+            </div>
             </NuxtLink>
-          </div>
           </div>
        </div> 
       </div>
@@ -88,6 +85,9 @@ export default {
 .home {
   padding-top: 120px;
   align-items: flex-start;
+  @media (max-width: 500px) {
+    padding-top: 64px;
+  }
 }
 .background {
   position: absolute;
@@ -122,13 +122,9 @@ export default {
     line-height: 1;
     font-weight: 600;
     letter-spacing: 0.1em;
-}
-.reveal-wrapper {
-  display: inline-block;
-  clip-path: polygon(100% 100%, -200% 100%, 100% -200%);
-  animation-duration: 2800ms;
-  animation-delay: 300ms;
-  animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+    @media (max-width: 599px) {
+    font-size: 1rem;
+  }
 }
 .big-title {
   text-transform: uppercase;
@@ -137,11 +133,14 @@ export default {
   display: block;
   font-size: 120px;
   line-height: 0.85;
-  font-family: "Beaufort for LOL", serif;
+  font-family: BeaufortforLOL-Bold, sans-serif;
   font-weight: 800;
   letter-spacing: 0.03em;
-  @media (min-width: 600px) {
-    font-size: calc(43.27px + 2.12vw);
+  @media (max-width: 599px) {
+    font-size: calc(22.24px + 4.3vw);
+  }
+  @media (min-width: 320px) {
+    font-size: calc(22.24px + 4.3vw);
   }
 }
 .big-big-title {
@@ -167,18 +166,23 @@ export default {
 }
 
 .body {
-  margin-top: 75px;
+  margin-top: 48px;
 }
 
   .champions {
     padding: 32px 80px;
+    @media (max-width: 500px) {
+    margin: calc(1.3%) calc(0.8%) 0px;
+    padding: 0px 3.2% 0px 3.2%;
+    }
     .champions-grid {
       display: grid;
       column-gap: 16px;
       row-gap: 32px;
       grid-template-columns: 1fr;
-      @media (min-width: 500px) {
+      @media (max-width: 500px) {
         grid-template-columns: repeat(2, 1fr);
+        row-gap: 0px;
       }
       @media (min-width: 750px) {
         grid-template-columns: repeat(2, 1fr);
@@ -195,7 +199,11 @@ export default {
         margin-bottom: 1%;
         margin-right: 1%;
         opacity: 1;
+        @media (max-width: 500px) {
+          padding-bottom: 2px;
+          padding-right: 2px;
         }
+      }
         .champion-img {
           position: relative;
           overflow: hidden;
@@ -208,7 +216,7 @@ export default {
           &:hover {
             @media (min-width: 768px) {
               transition-timing-function: ease, step-start, ease;
-              transform: scale(1.1);
+              transform: scale(1.05);
               border: 1px solid #927345;
               z-index: 3;
             }
@@ -318,9 +326,6 @@ export default {
           opacity: 1;
           transform: translateX(50%);
         }
-          .button {
-            margin-top: 8px;
-          }
         }
       }
 </style>

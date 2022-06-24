@@ -17,7 +17,6 @@
       </div>
       <div class="section-inner">
         <div class="dock">
-          <div class="info-container"></div>
           <div class="name-container">
             <div class="name-wrapper">
               <h1 class="heading">
@@ -69,11 +68,11 @@
         <div class="champions-button-container">
           <NuxtLink
                 :to="{ name: 'index', params: { id : champion.id }}"
-                class="champions-button-link">
+                class="champions-button-link">                
                 <span class="champions-button-text">Lista campioni</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 15" class="champions-button-icon">
-                  <path d="M12.8 8.4V4.8S13 1.1 7 0h-.1c-6 1.1-5.8 4.8-5.8 4.8v3.6c0 1.9-.8 2.5-.8 2.5C1.5 15.3 4.5 15 4.5 15c-1.6-2.1 0-5.8 0-5.8-2.3-.3-1.9-2.7-1.7-3.4 0 0 2.2-.1 3.3 1.6v4.2l.9.9.8-.8V7.5c1.2-1.8 3.3-1.7 3.3-1.6.2.7.6 3.1-1.7 3.3 0 0 1.6 3.8 0 5.8 0 0 3 .3 4.2-4.1.1 0-.8-.6-.8-2.5z"></path>
-                </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 15" class="champions-button-icon">
+                    <path d="M12.8 8.4V4.8S13 1.1 7 0h-.1c-6 1.1-5.8 4.8-5.8 4.8v3.6c0 1.9-.8 2.5-.8 2.5C1.5 15.3 4.5 15 4.5 15c-1.6-2.1 0-5.8 0-5.8-2.3-.3-1.9-2.7-1.7-3.4 0 0 2.2-.1 3.3 1.6v4.2l.9.9.8-.8V7.5c1.2-1.8 3.3-1.7 3.3-1.6.2.7.6 3.1-1.7 3.3 0 0 1.6 3.8 0 5.8 0 0 3 .3 4.2-4.1.1 0-.8-.6-.8-2.5z"></path>
+                  </svg>
           </NuxtLink>
         </div>
       </div>
@@ -102,7 +101,7 @@
                   </div>
                   <div class="option-list" id="ability">
                     <h2 class="abilities-title">Abilità</h2>
-                    <button @click='showPassive' class="option is-active">
+                    <button @click='updateSpellInfos' data-spell-type="Passiva" :data-spell-name="champion.passive.name" :data-spell-desc="champion.passive.description"  class="option is-active">
                       <span class="option-icon">
                         <span class="option-icon-content">
                           <img :src="`http://ddragon.leagueoflegends.com/cdn/12.10.1/img/passive/${champion.passive.image.full}`" alt="">
@@ -113,7 +112,7 @@
                         <span class="bullet"></span>
                       </span>
                     </button>
-                    <button @click='showQ' class="option">
+                    <button @click='updateSpellInfos' data-spell-type="Q" :data-spell-name="champion.spells[0].name" :data-spell-desc="champion.spells[0].description" class="option">
                       <span class="option-icon">
                         <span class="option-icon-content">
                           <img :src="`http://ddragon.leagueoflegends.com/cdn/12.10.1/img/spell/${champion.spells[0].image.full}`" alt="">
@@ -124,7 +123,7 @@
                         <span class="bullet"></span>
                       </span>
                     </button>
-                    <button @click='showW' class="option">
+                    <button @click='updateSpellInfos' data-spell-type="W" :data-spell-name="champion.spells[1].name" :data-spell-desc="champion.spells[1].description" class="option">
                       <span class="option-icon">
                         <span class="option-icon-content">
                           <img :src="`http://ddragon.leagueoflegends.com/cdn/12.10.1/img/spell/${champion.spells[1].image.full}`" alt="">
@@ -135,7 +134,7 @@
                         <span class="bullet"></span>
                       </span>
                     </button>
-                    <button @click='showE' class="option">
+                    <button @click='updateSpellInfos' data-spell-type="E" :data-spell-name="champion.spells[2].name" :data-spell-desc="champion.spells[2].description" class="option">
                       <span class="option-icon">
                         <span class="option-icon-content">
                           <img :src="`http://ddragon.leagueoflegends.com/cdn/12.10.1/img/spell/${champion.spells[2].image.full}`" alt="">
@@ -146,7 +145,7 @@
                         <span class="bullet"></span>
                       </span>
                     </button>
-                    <button @click='showR' class="option">
+                    <button @click='updateSpellInfos' data-spell-type="R" :data-spell-name="champion.spells[3].name" :data-spell-desc="champion.spells[3].description" class="option">
                       <span class="option-icon">
                         <span class="option-icon-content">
                           <img :src="`http://ddragon.leagueoflegends.com/cdn/12.10.1/img/spell/${champion.spells[3].image.full}`" alt="">
@@ -158,9 +157,15 @@
                       </span>
                     </button>
                     <div class="baseline">
-                      <div class="baseline-knob">
-                        <span class="bullet2"></span>
-                      </div>
+                    </div>
+                    <div class="ability-info">
+                      <ol class="ability-info-list">
+                        <li class="ability-info-item">
+                          <h6 class="ability-info-item-type"></h6>
+                          <h5 class="ability-info-item-name"></h5>
+                          <p class="ability-info-item-desc"></p>
+                        </li>
+                      </ol>
                     </div>
                     <div class="ability-info">
                       <ol class="ability-info-list">
@@ -168,26 +173,6 @@
                           <h6 class="ability-info-item-type">Passiva</h6>
                           <h5 class="ability-info-item-name">{{ champion.passive.name }}</h5>
                           <p class="ability-info-item-desc" v-html="champion.passive.description">{{ champion.passive.description }}</p>
-                        </li>
-                        <li v-show='showQ' class="ability-info-item">
-                          <h6 class="ability-info-item-type">Q</h6>
-                          <h5 class="ability-info-item-name">{{ champion.spells[0].name }}</h5>
-                          <p class="ability-info-item-desc" v-html="champion.spells[0].description">{{ champion.spells[0].description }}</p>
-                        </li>
-                        <li v-show='showW' class="ability-info-item">
-                          <h6 class="ability-info-item-type">W</h6>
-                          <h5 class="ability-info-item-name">{{ champion.spells[1].name }}</h5>
-                          <p class="ability-info-item-desc" v-html="champion.spells[1].description">{{ champion.spells[1].description }}</p>
-                        </li>
-                        <li v-show='showE' class="ability-info-item">
-                          <h6 class="ability-info-item-type">E</h6>
-                          <h5 class="ability-info-item-name">{{ champion.spells[2].name }}</h5>
-                          <p class="ability-info-item-desc" v-html="champion.spells[2].description">{{ champion.spells[2].description }}</p>
-                        </li>
-                        <li v-show='showR' class="ability-info-item">
-                          <h6 class="ability-info-item-type">R</h6>
-                          <h5 class="ability-info-item-name">{{ champion.spells[3].name }}</h5>
-                          <p class="ability-info-item-desc" v-html="champion.spells[3].description">{{ champion.spells[3].description }}</p>
                         </li>
                       </ol>
                     </div>
@@ -217,6 +202,9 @@
 </template>
 
 <script>
+import JQuery from 'jquery'
+window.$ = JQuery
+
 export default {
     async asyncData({ params, $axios }) {
         const json = await $axios.$get(
@@ -229,6 +217,15 @@ export default {
   data () {
     return {
       showPassive: true,
+    }
+  },
+  methods: {
+    updateSpellInfos(event) {
+      window.$('.ability-info-item-type').empty().append(event.currentTarget.getAttribute('data-spell-type'))
+      window.$('.ability-info-item-name').empty().append(event.currentTarget.getAttribute('data-spell-name'))
+      window.$('.ability-info-item-desc').empty().append(event.currentTarget.getAttribute('data-spell-desc'))
+      window.$(event.currentTarget).addClass('is-active')
+      window.$('.option').not(event.currentTarget).removeClass('is-active')
     }
   }
 }
@@ -243,6 +240,9 @@ export default {
   min-height: 75vh;
   padding: 0px 0px 75px;
   background: #0a0a0c;
+  @media (max-width: 599px) {
+    padding-bottom: 1.25rem;
+  }
 }
 .background-asset{
   position: relative;
@@ -251,7 +251,7 @@ export default {
   width: 100%;
   height: 80vh;
   max-height: 800px;
-  overflow: hidden;  
+  overflow: hidden;
 } 
 .background-img {
   position: relative;
@@ -267,6 +267,10 @@ export default {
     width: 100%;
     height: 50%;
     background: linear-gradient(transparent, rgb(10, 10, 12) 70%);
+    @media (max-width: 599px) {
+      height: 80%;
+      background: linear-gradient(transparent, rgb(10, 10, 12) 70%);
+    }
   }
 }
 img {
@@ -285,6 +289,9 @@ img {
   height: 100%;
   filter: blur(8px);
   animation: 3000ms cubic-bezier(0.215, 0.61, 0.355, 1) 500ms 1 normal;
+  @media (max-width: 599px) {
+    filter: blur(8px);
+  }
 }
 .clearimg {
   object-position: center 20%;
@@ -294,6 +301,10 @@ img {
   margin-top: 5%;
   transform: translate(-50%, -50%);
   animation: 2000ms cubic-bezier(0.215, 0.61, 0.355, 1) 700ms 1 normal;
+  @media (max-width:500px) {
+    width: 88%;
+    top: 17.5%;
+  }
 }
 .intro-wrapper {
   position: absolute;
@@ -316,6 +327,9 @@ img {
   position: relative;
   width: 60px;
   flex: 0 0 auto;
+  @media (max-width: 599px) {
+    display: none;
+  }
 }
 .left-text-container {
   z-index: 10;
@@ -347,11 +361,9 @@ img {
 .dock {
   position: relative;
   margin: -5.625rem 3.75rem 0px;
-}
-.info-container {
-  position: absolute;
-  inset: 1px;
-  pointer-events: none;
+  @media (max-width: 599px) {
+    margin: -28.7rem 0px 0px;
+  }
 }
 .name-container {
   position: relative;
@@ -368,15 +380,23 @@ img {
   margin: 0px;
   font-weight: normal;
   font-size: 2em;
+  @media (max-width: 599px) {
+    top: -2.6875rem;
+    margin-bottom: -2.6875rem;
+  }
 }
 .intro {
   text-transform: uppercase;
+  text-align: center;
   font-style: italic;
   line-height: 1.1;
   display: block;
   font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: 0.1em;
+  @media (max-width: 599px) {
+    font-size: 1rem;
+  }
 }
 .reveal-wrapper {
   display: inline-block;
@@ -387,9 +407,12 @@ img {
   font-style: italic;
   line-height: 1.1;
   display: block;
-  font-family: "Beaufort for LOL", serif;
+  font-family: BeaufortforLOL-Bold, sans-serif;
   font-weight: 800;
   letter-spacing: 0.03em;
+  @media (max-width: 599px) {
+    font-size: calc(22.24px + 4.3vw);
+  }
 }
 .champ-name {
   display: block;
@@ -399,14 +422,20 @@ img {
 .info-wrapper {
   position: relative;
   display: flex;
-
   border: 1px solid rgba(208, 168, 92, 0.3);
   border-top: none;
+  @media (max-width: 1023px) {
+    flex-wrap: wrap;
+  }
 }
 .specs {
   box-sizing: border-box;
   width: 50%;
   padding: 3.75rem;
+  @media (max-width: 599px) {
+    padding: 1.25rem 0.625rem;
+    width: 100%;
+  }
 }
 .specs-list {
   list-style: none;
@@ -463,6 +492,13 @@ img {
   margin: 2.5rem 0px;
   background: rgba(208, 168, 92, 0.3);
   transform-origin: center top;
+  @media (max-width: 599px) {
+    width: calc(100% - 6.25rem);
+  }
+  @media (max-width: 1023px) {
+    height: 1px;
+    margin: 0px auto;
+  }
 }
 .desc {
   box-sizing: border-box;
@@ -471,6 +507,12 @@ img {
   align-items: center;
   width: 50%;
   padding: 3.75rem;
+  @media (max-width: 599px) {
+    padding: 1.25rem 1.25rem 2.5rem;
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    width: 100%;
+  }
 }
 .p-desc {
   line-height: 1.28571;
@@ -491,40 +533,70 @@ img {
   max-width: 1335px;
   padding: 0px 3.75rem;
   margin: 0px auto;
+  @media (max-width: 1200px) {
+    padding: 0px 0.625rem;
+  }
 }
 .champions-button-container {
   position: absolute;
   top: 40px;
   right: 30px;
-  color: rgb(255, 255, 255);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+  font-family: BeaufortforLOL-Bold, sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  background-color: rgba(10,10,12,.6);
+  letter-spacing: .3em;
   line-height: 1.1;
   text-align: left;
   text-transform: uppercase;
-  background-color: rgba(10, 10, 12, 0.4);
-  border: 1px solid #d0a85c;
+  border: 1px solid #c4b998;
+  box-shadow: 0 0 16px 14px rgb(0 0 0 / 20%);
+  &:hover {
+    border: 1px solid #937341;
+    transition-timing-function: ease, step-start, ease;
+    transform: scale(1.05);
+  }
+  @media (max-width: 599px) {
+    width: 36px;
+    height: 36px;
+    top: 26px;
+    right: 20px;
+  }
 }
 .champions-button-link {
   cursor: pointer;
+  color: #c4b998;
   position: relative;
   display: block;
   height: 100%;
-  color: rgb(255, 255, 255);
   padding: 10px 20px;
   text-decoration: none;
+  @media (max-width: 599px) {
+    padding: 0px;
+  }
 }
 .champions-button-text {
   vertical-align: middle;
   padding-right: 10px;
+  @media (max-width: 599px) {
+    line-height: 1.1;
+    font-size: 0px;
+    color: transparent;
+  }
 }
 .champions-button-icon {
-  fill: rgb(255, 255, 255);
+  fill: #c4b998;
   height: 14px;
   width: 14px;
   vertical-align: middle;
   overflow: hidden;
+  @media (max-width: 599px) {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    right: 9px;
+    top: 9px;
+  }
 }
 .scroll-indicator {
   position: absolute;
@@ -536,11 +608,18 @@ img {
   height: 58;
   fill: none;
   overflow: hidden;
+  @media (max-width: 1023px) {
+    display: none;
+  }
 }
 .abilities {
   position: relative;
   padding: 75px 0px 15rem;
   display: block;
+  @media (max-width: 1023px) {
+    padding: 0px 0px 3.75rem;
+    height: 600px;
+  }
 }
 .mobile-title {
 display: none;
@@ -548,7 +627,7 @@ width: 100%;
 margin: -1px 0px 0px;
 color: rgb(255, 255, 255);
 letter-spacing: 0.05em;
-font-family: "Beaufort for LOL", serif;
+font-family: "BeaufortforLOL-Bold", sans-serif;
 font-weight: 800;
 text-align: center;
 font-size: 1.875rem;
@@ -558,6 +637,9 @@ margin-block-start: 0.83em;
 margin-block-end: 0.83em;
 margin-inline-start: 0px;
 margin-inline-end: 0px;
+  @media (max-width: 1023px) {
+    display: block;
+  }
 }
 .abilities-wrapper {
   display: flex;
@@ -581,10 +663,22 @@ margin-inline-end: 0px;
   display: flex;
   max-width: 2040px;
   padding: 0px 60px 0px 0px;
+  @media (max-width: 1023px) {
+    flex-flow: column-reverse wrap;
+    padding: 0px 20px;
+  }
 }
 .selector-wrapper {
   flex: 2 1 120%;
   padding-top: 5.625rem;
+  @media (max-width: 599px) {
+    padding: 20px 0px;
+  }
+  @media (max-width: 1023px) {
+    flex: 1 1 auto;
+    box-sizing: border-box;
+    width: 100%;
+  }
 }
 .wrapwrapper {
   width: 100%;
@@ -593,6 +687,16 @@ margin-inline-end: 0px;
   position: relative;
   width: 100%;
   display: flex;
+  @media (max-width: 599px) {
+    width: calc(100% + 4px);
+    margin: 0px -2px;
+  }
+  @media (max-width: 1023px) {
+    padding-bottom: 250px;
+    width: calc(100% + 10px);
+    margin: 0px -5px;
+    overflow: visible;
+  }
 }
 .side-fill {
   flex: 1 1 auto;
@@ -606,11 +710,24 @@ margin-inline-end: 0px;
   position: absolute;
   bottom: 16.5px;
   height: 1px;
-  background-color: rgb(57, 64, 72);
+  background-color: rgba(208, 168, 92, 0.3);
+  @media (max-width: 1023px) {
+    display: none;
+  }
+  @media (max-width: 599px) {
+    bottom: 40.5px;
+  }
 }
 .option-list {
   position: relative;
   display: inline-flex;
+  @media (max-width: 1023px) {
+    width: 100%;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding: 30px 0px;
+  }
 }
 .abilities-title {
   position: absolute;
@@ -630,6 +747,10 @@ margin-inline-end: 0px;
   margin-block-end: 0.83em;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
+  @media (max-width: 1023px) {
+    font-size: calc(22.24px + 4.3vw);
+    margin-left: -12px;
+  }
 }
 .option {
   cursor: pointer;
@@ -641,22 +762,28 @@ margin-inline-end: 0px;
   padding: 12px;
   border: 0px;
   background-color: transparent;
-  color: rgb(57, 64, 72);
+  color: #463A24;
   overflow: visible;
-  &:hover .option-icon-content {
-    transform: translateY(15px) scale(1, 1);
-    transition: transform 0.2s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
-    fill: rgb(208, 168, 92);
-  }
   &:hover .bullet {
     transition: color 600ms ease 0s;
     color: rgb(208, 168, 92);
+  }
+  @media (max-width: 1023px) {
+    margin-left: 0px;
+    flex: 0 0 auto;
+    min-width: auto;
+    min-height: auto;
+    padding: 0px;
+    white-space: nowrap;
   }
 }
 .is-active .option-icon-content {
   transform: translateY(0px) scale(1, 1);
   transition: transform 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
   border: 2px solid #d0a85c;
+  &:hover {
+    transform: none;
+  }
 }
 .is-active .option-line {
   opacity: 1;
@@ -664,16 +791,12 @@ margin-inline-end: 0px;
   transition-duration: 400ms;
   transition-delay: 400ms;
 }
-.is-active .option-bullet-container::before {
-  width: calc(50% - 10px);
-  transition: width 240ms ease 360ms;
-}
-.ability-info-item .is-active {
-  pointer-events: auto;
-  z-index: 1;
-  opacity: 1;
-  transition-duration: 1s;
-  transition-delay: 0.2s;
+.is-active .bullet {
+  color: rgb(208, 168, 92);
+  transform: scale(1.5);
+  transform-origin: center;
+  transition-duration: 2s;
+  transition-timing-function: ease-in-out;
 }
 .option-icon {
   position: relative;
@@ -681,6 +804,13 @@ margin-inline-end: 0px;
   width: 70px;
   height: 70px;
   margin: 0px auto 10px;
+  @media (max-width: 599px) {
+    width: 55px;
+    height: 55px;
+  }
+  @media (max-width: 1023px) {
+    margin: 0px;
+  }
 }
 .option-icon-content {
   position: absolute;
@@ -692,18 +822,27 @@ margin-inline-end: 0px;
   will-change: transform;
   transform-origin: center bottom;
   transition: transform 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) 0s, fill 0.2s ease-in-out 0s;
+  &:hover {
+    transform: translateY(15px) scale(1, 1);
+    transition: transform 0.2s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+  }
+  @media (max-width: 599px) {
+    width: calc(100% - 4px);
+    top: 2px;
+    left: 2px;
+    transform: none;
+  }
+  @media (max-width: 1023px) {
+    height: auto;
+  }
 }
 .option-icon-content img {
   width: 100%;
   height: 100%;
-  fill: rgb(57, 64, 72);
-  transition: fill 0.15s ease-in-out 0s;
 }
 .option-line {
   opacity: 1;
   transform: scaleY(1);
-  transition-duration: 400ms;
-  transition-delay: 400ms;
   display: block;
   width: 1px;
   height: 20px;
@@ -714,6 +853,9 @@ margin-inline-end: 0px;
   will-change: transform;
   transform-origin: center bottom;
   transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+  @media (max-width: 1023px) {
+    display: none;
+  }
 }
 .option-bullet-container {
   display: block;
@@ -735,6 +877,9 @@ margin-inline-end: 0px;
     z-index: -1;
     transition: width 0ms ease 0ms;
   }
+  @media (max-width: 1023px) {
+    display: none;
+  }
 }
 .bullet {
   opacity: 1;
@@ -752,32 +897,12 @@ margin-inline-end: 0px;
   width: 100%;
   height: 1px;
   background-color: transparent;
-}
-.baseline-knob {
-  left: 10%;
-  position: absolute;
-  z-index: 1;
-  box-sizing: border-box;
-  width: 20px;
-  height: 20px;
-  margin: -10px 0px 0px -10px;
-  will-change: left;
-  transition: left 600ms cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
-  border: 2px solid currentcolor;
-  border-radius: 100%;
-  color: rgb(208, 168, 92);
-}
-.bullet2 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: block;
-  width: 9px;
-  height: 9px;
-  background-color: currentcolor;
-  border-radius: 50%;
-  transition: color 300ms ease 0s;
+  @media (max-width: 1023px) {
+    display: none;
+  }
+  @media (max-width: 599px) {
+    bottom: 40.5px;
+  }
 }
 .ability-info {
   position: absolute;
@@ -785,6 +910,10 @@ margin-inline-end: 0px;
   left: 2.8125rem;
   right: 0px;
   color: rgb(255, 255, 255);
+  @media (max-width: 1023px) {
+    left: 4px;
+    right: 4px;
+  }
 }
 .ability-info-list {
   list-style: none;
@@ -797,6 +926,9 @@ margin-inline-end: 0px;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
   padding-inline-start: 40px;
+  @media (max-width: 599px) {
+    margin: 0px;
+  }
 }
 .ability-info-item {
   position: absolute;
@@ -808,28 +940,36 @@ margin-inline-end: 0px;
   transition: opacity 0.4s cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
 }
 .ability-info-item-type {
-  margin-bottom: 0px;
   margin-top: 0px;
   font-size: 0.625rem;
   text-transform: uppercase;
   line-height: 1.1;
   font-weight: normal;
   letter-spacing: 0.15em;
-  color: rgb(126, 126, 126);
+  color: #c4b998;
+}
+.ability-info-item-type h6 {
   display: block;
+  margin-bottom: 0px;
   margin-block-start: 2.33em;
   margin-block-end: 2.33em;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
 }
+
 .ability-info-item-name {
-  margin-bottom: 0px;
-  margin-top: 0.375rem;
+  margin-top: 0px;
+  margin-bottom: 0.5rem;
   font-size: 1.125rem;
   line-height: 1.11111;
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  @media (max-width: 599px) {
+    margin-top: 1rem;
+  }
+}
+.ability-info-item-name h5 {
   display: block;
   margin-block-start: 1.67em;
   margin-block-end: 1.67em;
@@ -837,12 +977,14 @@ margin-inline-end: 0px;
   margin-inline-end: 0px;
 }
 .ability-info-item-desc {
-  margin-bottom: 0px;
-  margin-top: 0.375rem;
+  margin-top: 6px;
   font-size: 0.875rem;
   line-height: 1.4;
   letter-spacing: 0.05em;
+}
+.ability-info-item-desc p {
   display: block;
+  margin-bottom: 0px;
   margin-block-start: 1em;
   margin-block-end: 1em;
   margin-inline-start: 0px;
@@ -855,13 +997,22 @@ margin-inline-end: 0px;
   width: 570%;
   height: 1px;
   object-fit: fill;
-  background-color: rgb(57, 64, 72);
+  background-color: #463A24;
+  @media (max-width: 1023px) {
+    display: none;
+  }
+@media (max-width: 599px) {
+    bottom: 40.5px;
+  }
 }
 .preview-wrapper {
   box-sizing: border-box;
   width: 100%;
   flex: 1 1 100%;
   padding-top: 3.75rem;
+  @media (max-width: 599px) {
+    display: none;    
+  }
 }
 .wrap-preview-wrapper {
   width: 100%;
