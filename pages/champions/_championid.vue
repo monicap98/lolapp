@@ -67,7 +67,7 @@
         </div>
         <div class="champions-button-container">
           <NuxtLink
-                :to="{ name: 'index', params: { id : champion.id }}"
+                :to="{ name: 'index'}"
                 class="champions-button-link">                
                 <span class="champions-button-text">Lista campioni</span>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 15" class="champions-button-icon">
@@ -170,9 +170,9 @@
                     <div class="ability-info">
                       <ol class="ability-info-list">
                         <li v-show='showPassive' class="ability-info-item">
-                          <h6 class="ability-info-item-type">Passiva</h6>
-                          <h5 class="ability-info-item-name">{{ champion.passive.name }}</h5>
-                          <p class="ability-info-item-desc" v-html="champion.passive.description">{{ champion.passive.description }}</p>
+                          <h6 class="ability-info-item-type" style="opacity: 1">Passiva</h6>
+                          <h5 class="ability-info-item-name" style="opacity: 1">{{ champion.passive.name }}</h5>
+                          <p class="ability-info-item-desc" style="opacity: 1" v-html="champion.passive.description">{{ champion.passive.description }}</p>
                         </li>
                       </ol>
                     </div>
@@ -206,24 +206,30 @@ import JQuery from 'jquery'
 window.$ = JQuery
 
 export default {
-    async asyncData({ params, $axios }) {
-        const json = await $axios.$get(
-            `https://ddragon.leagueoflegends.com/cdn/12.9.1/data/it_IT/champion/${params.id}.json`
-            )
-        const champion = json.data[params.id]
-        return { champion }
-    },
+  head() {
+    return {
+      title: this.champion.id,
+    }
+  },
+  async asyncData({ params, $axios }) {
+      const json = await $axios.$get(
+          `https://ddragon.leagueoflegends.com/cdn/12.9.1/data/it_IT/champion/${params.id}.json`
+          )
+      const champion = json.data[params.id]
+      return { champion }
+  },
     
   data () {
     return {
       showPassive: true,
     }
   },
+
   methods: {
     updateSpellInfos(event) {
-      window.$('.ability-info-item-type').empty().append(event.currentTarget.getAttribute('data-spell-type'))
-      window.$('.ability-info-item-name').empty().append(event.currentTarget.getAttribute('data-spell-name'))
-      window.$('.ability-info-item-desc').empty().append(event.currentTarget.getAttribute('data-spell-desc'))
+      window.$('.ability-info-item-type').empty().append(event.currentTarget.getAttribute('data-spell-type')).removeAttr('style').animate({opacity: 1}, { duration: 'slow', easing: 'linear' })
+      window.$('.ability-info-item-name').empty().append(event.currentTarget.getAttribute('data-spell-name')).removeAttr('style').animate({opacity: 1}, { duration: 'slow', easing: 'linear' })
+      window.$('.ability-info-item-desc').empty().append(event.currentTarget.getAttribute('data-spell-desc')).removeAttr('style').animate({opacity: 1}, { duration: 'slow', easing: 'linear' })
       window.$(event.currentTarget).addClass('is-active')
       window.$('.option').not(event.currentTarget).removeClass('is-active')
     }
@@ -301,7 +307,7 @@ img {
   margin-top: 5%;
   transform: translate(-50%, -50%);
   animation: 2000ms cubic-bezier(0.215, 0.61, 0.355, 1) 700ms 1 normal;
-  @media (max-width:500px) {
+  @media (max-width:599px) {
     width: 88%;
     top: 17.5%;
   }
@@ -407,7 +413,7 @@ img {
   font-style: italic;
   line-height: 1.1;
   display: block;
-  font-family: BeaufortforLOL-Bold, sans-serif;
+  font-family: "BeaufortforLOL-Bold", sans-serif;
   font-weight: 800;
   letter-spacing: 0.03em;
   @media (max-width: 599px) {
@@ -541,7 +547,7 @@ img {
   position: absolute;
   top: 40px;
   right: 30px;
-  font-family: BeaufortforLOL-Bold, sans-serif;
+  font-family: "BeaufortforLOL-Bold", sans-serif;
   font-weight: 700;
   font-size: 11px;
   background-color: rgba(10,10,12,.6);
@@ -553,6 +559,7 @@ img {
   box-shadow: 0 0 16px 14px rgb(0 0 0 / 20%);
   &:hover {
     border: 1px solid #937341;
+    transition-duration: .4s,.4s,.4s;
     transition-timing-function: ease, step-start, ease;
     transform: scale(1.05);
   }
@@ -737,7 +744,7 @@ margin-inline-end: 0px;
   margin-bottom: 40px;
   color: rgb(255, 255, 255);
   letter-spacing: 0.05em;
-  font-family: "Beaufort for LOL", serif;
+  font-family: "BeaufortforLOL-Bold", serif;
   font-weight: 800;
   font-size: 3.75rem;
   display: block;
@@ -778,9 +785,9 @@ margin-inline-end: 0px;
   }
 }
 .is-active .option-icon-content {
+  border: 1px solid #d0a85c;
   transform: translateY(0px) scale(1, 1);
   transition: transform 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
-  border: 2px solid #d0a85c;
   &:hover {
     transform: none;
   }
@@ -789,13 +796,12 @@ margin-inline-end: 0px;
   opacity: 1;
   transform: scaleY(1);
   transition-duration: 400ms;
-  transition-delay: 400ms;
+  transition-delay: 200ms;
 }
 .is-active .bullet {
   color: rgb(208, 168, 92);
   transform: scale(1.5);
   transform-origin: center;
-  transition-duration: 2s;
   transition-timing-function: ease-in-out;
 }
 .option-icon {
@@ -947,6 +953,7 @@ margin-inline-end: 0px;
   font-weight: normal;
   letter-spacing: 0.15em;
   color: #c4b998;
+  opacity: 0;
 }
 .ability-info-item-type h6 {
   display: block;
@@ -965,6 +972,7 @@ margin-inline-end: 0px;
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  opacity: 0;
   @media (max-width: 599px) {
     margin-top: 1rem;
   }
@@ -981,6 +989,7 @@ margin-inline-end: 0px;
   font-size: 0.875rem;
   line-height: 1.4;
   letter-spacing: 0.05em;
+  opacity: 0;
 }
 .ability-info-item-desc p {
   display: block;

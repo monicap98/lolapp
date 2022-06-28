@@ -1,25 +1,16 @@
 <template>
   <div class="home">
-    <!-- Heading -->
-        <div class="heading-wrapper">
-          <h1 class="heading">
-            <span class="intro">
-                <span>scegli un</span>
-            </span>
-            <strong class="big-title">
-                <span class="big-big-title">campione</span>
-            </strong>
-          </h1>
-        </div>
-        <p class="description">
-          Con più di 140 campioni, troverai quello perfetto per il tuo stile di gioco. Padroneggiane uno, o tutti.
-        </p>
-
+    
+    <!-- Hero -->
+    <Hero />
+      <p class="description">
+        Con più di 140 campioni, troverai quello perfetto per il tuo stile di gioco. Padroneggiane uno, o tutti.
+      </p>
         <div class="body">
 
-          <!-- Filters
-          <Filters />
-          -->
+    <!-- Filters
+    <Filters />
+    -->
 
     <!-- Champions -->
     <div class="background"></div>
@@ -71,6 +62,23 @@
 
 <script>
 export default {
+  head() {
+    return {
+      title: 'LoL App - Campioni di LoL',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Scopri i campioni di League of Legends',
+        },
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: 'lol, league of legends, campioni',
+        },
+      ]
+    }
+  },
   async asyncData({ params, $axios }) {
     const json = await $axios.$get(
       'https://ddragon.leagueoflegends.com/cdn/12.9.1/data/it_IT/champion.json'
@@ -85,68 +93,9 @@ export default {
 .home {
   padding-top: 120px;
   align-items: flex-start;
-  @media (max-width: 500px) {
+  @media (max-width: 599px) {
     padding-top: 64px;
   }
-}
-.background {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  filter: brightness(.4);
-  background-image: url(../assets/imgs/championsBackground.jpg);
-  background-position: top;
-  background-repeat: no-repeat;
-  background-size: contain;
-  opacity: .2;
-}
-// Heading
-.heading-wrapper {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  color: white;
-}
-.heading {
-  margin: 0px;
-  font-weight: normal;
-}
-.intro {
-    text-transform: uppercase;
-    font-style: italic;
-    line-height: 1.1;
-    display: block;
-    font-size: 1.5rem;
-    line-height: 1;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    @media (max-width: 599px) {
-    font-size: 1rem;
-  }
-}
-.big-title {
-  text-transform: uppercase;
-  font-style: italic;
-  line-height: 1.1;
-  display: block;
-  font-size: 120px;
-  line-height: 0.85;
-  font-family: BeaufortforLOL-Bold, sans-serif;
-  font-weight: 800;
-  letter-spacing: 0.03em;
-  @media (max-width: 599px) {
-    font-size: calc(22.24px + 4.3vw);
-  }
-  @media (min-width: 320px) {
-    font-size: calc(22.24px + 4.3vw);
-  }
-}
-.big-big-title {
-  display: block;
-  padding: 0px 15px 10px;
-  margin-bottom: -10px;
 }
 .description {
   display: block;
@@ -164,6 +113,19 @@ export default {
   line-height: 1.6;
   animation: 1000ms cubic-bezier(0.215, 0.61, 0.355, 1) 400ms 1 normal both running;
 }
+.background {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  filter: brightness(.4);
+  background-image: url(../assets/imgs/championsBackground.jpg);
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: .2;
+}
 
 .body {
   margin-top: 48px;
@@ -171,7 +133,7 @@ export default {
 
   .champions {
     padding: 32px 80px;
-    @media (max-width: 500px) {
+    @media (max-width: 599px) {
     margin: calc(1.3%) calc(0.8%) 0px;
     padding: 0px 3.2% 0px 3.2%;
     }
@@ -180,7 +142,7 @@ export default {
       column-gap: 16px;
       row-gap: 32px;
       grid-template-columns: 1fr;
-      @media (max-width: 500px) {
+      @media (max-width: 599px) {
         grid-template-columns: repeat(2, 1fr);
         row-gap: 0px;
       }
@@ -256,7 +218,7 @@ export default {
           color: #937341;
           font-size: 14px;
           letter-spacing: 2px;
-          font-family: BeaufortforLOL-Bold, sans-serif;
+          font-family: "BeaufortforLOL-Bold", sans-serif;
           font-weight: 500;
           text-transform: uppercase;
         }
@@ -265,7 +227,7 @@ export default {
           font-size: 12px;
           letter-spacing: .05em;
           padding-top: 6px;
-          font-family: BeaufortforLOL-Bold, sans-serif;
+          font-family: "BeaufortforLOL-Bold", sans-serif;
           font-weight: 500;
           text-transform: capitalize;
         }
@@ -274,7 +236,7 @@ export default {
           right: 0;
           bottom: 0;
           left: 0;
-          font-family: BeaufortforLOL-Bold, sans-serif;
+          font-family: "BeaufortforLOL-Bold", sans-serif;
           font-weight: 700;
           font-size: 11px;
           background-color: rgba(10,10,12,.9);

@@ -1,7 +1,16 @@
 <template>
-    <div class="hero">
-        <!-- <img src="../assets/imgs/lol.jpg" alt="" /> -->
+    
+    <div class="heading-wrapper">
+      <h1 class="heading">
+        <span class="intro">
+            <span>scegli un</span>
+        </span>
+        <strong class="big-title">
+          <span class="big-big-title">campione</span>
+        </strong>
+      </h1>
     </div>
+
 </template>
 
 <script>
@@ -11,77 +20,49 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.hero {
-  height: 40vh;
+.heading-wrapper {
   position: relative;
-  background-image: url("../assets/imgs/lol.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  @media (min-width: 750px) {
-    height: 50vh;
+  z-index: 1;
+  text-align: center;
+  color: white;
+}
+.heading {
+  margin: 0px;
+  font-weight: normal;
+}
+.intro {
+    text-transform: uppercase;
+    font-style: italic;
+    line-height: 1.1;
+    display: block;
+    font-size: 1.5rem;
+    line-height: 1;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    @media (max-width: 599px) {
+    font-size: 1rem;
   }
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
+}
+.big-title {
+  text-transform: uppercase;
+  font-style: italic;
+  line-height: 1.1;
+  display: block;
+  font-size: 120px;
+  line-height: 0.85;
+  font-family: "BeaufortforLOL-Bold", sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  @media (max-width: 599px) {
+    font-size: calc(22.24px + 4.3vw);
   }
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  @media (min-width: 320px) {
+    font-size: calc(22.24px + 4.3vw);
   }
-  .text-container {
-    z-index: 99;
-    position: absolute;
-    top: 0;
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    .text {
-      padding: 0 16px;
-      width: 100%;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-    .mini-heading {
-      font-weight: 600;
-      font-size: 18px;
-      text-transform: uppercase;
-      color: #d0a85c;
-      margin-bottom: 8px;
-      @media (min-width: 750px) {
-        font-size: 22px;
-      }
-    }
-    h1 {
-      color: #fff;
-      font-size: 64px;
-      font-weight: 200;
-      margin-bottom: 8px;
-      @media (min-width: 750px) {
-        font-size: 84px;
-      }
-      span {
-        font-weight: 500;
-      }
-    }
-    .paragraph {
-        font-family: 'Spiegel';
-        color:#fff;
-    }
-    .button {
-      font-size: 20px;
-      align-self: flex-start;
-    }
-  }
+}
+.big-big-title {
+  display: block;
+  padding: 0px 15px 10px;
+  margin-bottom: -10px;
 }
 </style>
