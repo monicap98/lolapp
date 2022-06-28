@@ -16,7 +16,7 @@
         <div class="right-content"></div>
       </div>
       <div class="section-inner">
-        <div class="dock">
+        <div class="dock" data-aos="fade-up" data-aos-duration="800">
           <div class="name-container">
             <div class="name-wrapper">
               <h1 class="heading">
@@ -93,7 +93,7 @@
         </div>
         <div class="abilities-content">
           <div class="abilities-inner">
-            <div class="selector-wrapper">
+            <div class="selector-wrapper" data-aos="fade-up" data-aos-duration="800">
               <div class="wrapwrapper">
                 <div class="wrapper-inner">
                   <div class="side-fill">
@@ -203,9 +203,11 @@
 
 <script>
 import JQuery from 'jquery'
+import aosMixin from '~/mixins/aos'
 window.$ = JQuery
 
 export default {
+  mixins: [aosMixin],
   head() {
     return {
       title: this.champion.id,

@@ -16,7 +16,7 @@
     <div class="background"></div>
     <div class="container champions">
       <div id="champion-grid" class="champions-grid">
-          <div class="champion" v-for="champion in champions" :key="champion.id">
+          <div class="champion" v-for="champion in champions" :key="champion.id" data-aos="fade-up" data-aos-duration="800" data-aos-easing="linear">
           <NuxtLink :to="{ name: 'champions-championid', params: { id : champion.id }}" class="champion-img">
             <img
               :src="`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion.id}_0.jpg`"
@@ -61,7 +61,9 @@
 </template>
 
 <script>
+import aosMixin from '~/mixins/aos'
 export default {
+  mixins: [aosMixin],
   head() {
     return {
       title: 'LoL App - Campioni di LoL',

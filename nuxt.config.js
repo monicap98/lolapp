@@ -29,7 +29,11 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
+    ['nuxt-gsap-module'],
   ],
+  gsap: {
+    /* Module Options */
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
